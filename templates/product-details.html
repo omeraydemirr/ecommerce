@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Ürün Detayı</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+    	<link href="/static/css/dropdown.css" rel="stylesheet">
+
+	<link href="/static/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+                                                    {% block body %}
+
+<body>
+{% include "header.html" %}
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+{% include "category.html" %}
+
+
+
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+
+					<div class="product-details"><!--product-details-->
+
+                        <div class="col-sm-5">
+							<div class="view-product">
+
+                                <img src="{{ products.image.url}}" class="img-responsive"  >
+
+							</div>
+
+                                                        <!-- kayan resimler
+
+                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+								
+								    <div class="carousel-inner">
+										<div class="item active">
+										  <a href=""><img src="/static/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+										<div class="item">
+										  <a href=""><img src="/static/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+										<div class="item">
+										  <a href=""><img src="/static/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/static/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+										
+									</div>
+
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+							-->
+
+						</div>
+
+
+
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+                                <form action="/order/addtocart/{{ products.id }}" method="POST">
+
+
+
+
+								<h2>{{ products.title }}</h2>
+								<p>Product No:{{ products.id }}</p>
+
+                                <span>
+                                                            {% if request.user.is_authenticated %}
+									<span>{{ products.price2 }} TL</span>
+                                                            {% endif %}
+                                                                                                                        {% if not request.user.is_authenticated %}
+									<span>{{ products.price1 }} TL</span>
+                                                            {% endif %}
+
+
+									<label>Total:</label>
+                                                    <input name="quantity" class="input" type="number" min="0" max="{{ rs.amount }}" value="1">
+									<button type="submit" class="btn btn-default cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to Cart
+									</button>
+								</span>
+                                {% if products.status == 1 %}
+
+								<p><b>Is in stock?:</b>YES</p>
+                                {% endif %}
+                                    {% if products.status == 2 %}
+                                    								<p><b>Stokta mı?:</b>NO</p>
+
+
+                                {% endif %}
+                                </form>
+							</div><!--/product-information-->
+                        {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+						</div>
+					</div><!--/product-details-->
+
+
+
+
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+                                <li class="active"><a href="#reviews" data-toggle="tab">Description</a></li>
+								<li><a href="#details" data-toggle="tab">Payment Methods</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade" id="details" >
+
+<!----ÖDEME SEÇENEKLERİ BÖLÜMÜ--->
+
+							</div>
+
+
+							<div class="tab-pane fade active in" id="reviews" >
+								<div class="col-sm-12">
+									<ul>
+										<li><a href=""><i class="fa fa-angle-right"></i>{{ products.category }}</a></li>
+                                        <li><a href=""><i class="fa fa-angle-double-down"></i>{{ products.title }}</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>Added Date: </a></li>
+										<li><a href=""><i class="fa fa-calendar-o"></i>{{ products.create_at }}</a></li>
+                                    </ul>
+
+                                   {% block content %} {{ products.detail | safe | linebreaks}} {% endblock %}
+								</div>
+							</div>
+
+
+
+
+							
+						</div>
+					</div><!--/category-tab-->
+
+
+                <!--
+					<div class="recommended_items">
+						<h2 class="title text-center">recommended items</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="/static/images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div>
+					-->
+				</div>
+			</div>
+		</div>
+	</section>
+	
+{% include "footer.html" %}
+
+  
+    <script src="/static/js/jquery.js"></script>
+	<script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+{% endblock %}
+</html>

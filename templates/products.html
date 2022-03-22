@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Products
+
+    </title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/responsive.css" rel="stylesheet">
+        <link href="/static/css/dropdown.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+	{% include "header.html" %}
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+{% include "category.html" %}
+					</div>
+
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Products</h2>
+
+
+                        {% for rs in products %}
+
+                    					<div class="col-sm-4">
+
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+                                        <a href="/product/{{ rs.id }}/{{ rs.slug }}"><img href="/product/{{ rs.id }}/{{ rs.slug }}" src="{{ rs.image.url }}" alt="" /></a>
+										{% if request.user.is_authenticated %}
+									<h2>{{ rs.price2 }} TL</h2>
+                                                            {% endif %}
+                                        {% if not request.user.is_authenticated %}
+									<h2>{{ rs.price1 }} TL</h2>
+                                                            {% endif %}
+										<p><a style="color: #312c2c;font-family: Roboto" href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title}}</a></p>
+
+										<!---<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>-->
+									</div>
+
+
+
+								</div>
+						</div>
+                                        </div>
+                            {% endfor %}
+
+
+<div class="row">
+<div class="col-md-7 col-md-offset-5">
+						<ul class="pagination">
+        {% if products.has_previous %}
+           <li> <a href="?page=1">&laquo; İlk Sayfa</a></li>
+            <li><a href="?page={{ products.previous_page_number }}">Önceki Sayfa</a></li>
+        {% endif %}
+
+        <span style="background: #FE980F;color: white;border-radius: 5px;font-size: 15px">
+            Sayfa {{ products.number }} - {{ products.paginator.num_pages }}.
+        </span>
+
+        {% if products.has_next %}
+            <li> <a href="?page={{ products.next_page_number }}">İleri</a></li>
+           <li> <a href="?page={{ products.paginator.num_pages }}">Son Sayfa &raquo;</a></li>
+        {% endif %}
+
+
+
+
+						</ul>
+</div>
+</div>
+					</div><!--features_items-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% include "footer.html" %}
+
+
+    <script src="/static/js/jquery.js"></script>
+	<script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

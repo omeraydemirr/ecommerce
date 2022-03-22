@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Contact | E-Shopper</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+{% include "header.html" %}
+	 <div id="contact-page" class="container">
+	    		<div class="col-sm-5" style="width: 200px;">
+				<div class="left-sidebar">
+						<h2>ÜYE PANELİ</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a href="/siparis">
+											<span class="badge pull-right"><i class="fa"></i></span>
+											Sipariş
+										</a>
+									</h4>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a href="/contact">
+											<span class="badge pull-right"><i class=""></i></span>
+											İletişim
+										</a>
+									</h4>
+								</div>
+							</div>
+
+
+
+
+
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#klima">
+											<span class="badge pull-right"><i class="fa "></i></span>
+											Üye Bilgileri
+										</a>
+									</h4>
+								</div>
+							</div>
+
+
+						</div><!--/category-products-->
+					</div>
+				</div>
+
+                	    		<div class="col-lg-5" >
+					<h2 class="bg title text-center" style="width: 900px">ÜRÜN DETAYI<strong></strong></h2>
+					<div id="gmap" class="contact-map">
+                <table class="table-striped" style="width: 900px;margin-left: 20px">
+                    <tr>
+                        <th class="text-center">Ürün No</th>
+                        <th class="text-center">Ürün Adı</th>
+                        <th class="text-center">Adet</th>
+                        <th class="text-center">Fiyat</th>
+                        <th class="text-center">Durum</th>
+                         <th class="text-center">Tarih</th>
+                    </tr>
+                {% for rs in orderitems %}
+                    <tr>
+                        <td class="text-center">{{ rs.id }}</td>
+                    <td class="text-center">{{ rs.product.title }}</td>
+                    <td class="text-center">{{ rs.quantity }}</td>
+                        <td class="text-center">{{ rs.amount }}</td>
+                    <td class="text-center">{{ rs.status }}</td>
+                    <td class="text-center">{{ rs.create_at }}</td>
+
+                    </tr>
+                {% endfor %}
+
+                </table>
+					</div>
+				</div>
+
+
+
+    </div><!--/#contact-page-->
+
+
+{% include "footer.html" %}
+
+  
+    <script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="/static/js/gmaps.js"></script>
+	<script src="/static/js/contact.js"></script>
+	<script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

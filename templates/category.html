@@ -1,0 +1,28 @@
+<h2>Categories</h2>
+<div  id='cssmenu' style="font-family: Arial" >
+<ul>
+
+{% load mptt_tags %}
+
+    {% recursetree category %}
+        <li class="brands-name has-sub" style="background: #ffffff" >
+            <a href="/category/{{ node.id }}/{{ node.slug }}" style="font-family: Roboto;font-size:medium"><span> {{ node.title }}</span> </a>
+            {% if not node.is_leaf_node %}
+                <ul class="" style="background: #ffffff">
+                    <li class="has-sub" style="background: #ffffff">{{ children }}
+
+                      <!---
+             <ul>
+               <li><a href='#'><span>aaa</span></a></li>
+            </ul>
+                      --->
+
+                  </li>
+                </ul>
+        </li>
+            {% endif %}
+
+    {% endrecursetree %}
+
+</ul>
+</div>

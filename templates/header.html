@@ -1,0 +1,119 @@
+	<header id="header"><!--header-->
+		<!--header_top
+        <div class="header_top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+        <!--/header_top-->
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="/"><img src="/static/images/home/logo.jpeg" alt="" style="width: 120px;height: 120px;" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right" style="margin-top:50px">
+							<ul class="nav navbar-nav">
+                                <li><a class="item-control" href="/order/shopcart" > <i class="fa fa-shopping-cart"> My Cart | {{ request.session.cart_items }} </i> </a></li>
+
+                                                            {% if request.user.is_superuser %}
+
+                                <li><a href="/admin"><i class="fa fa-user"></i>Admin</a></li>
+                                <li><a href="/logout"><i class="fa fa-user"></i>Çıkış</a></li>
+                                {% endif %}
+
+
+
+                                {% if not request.user.is_superuser and request.user.is_authenticated %}
+                                <li><a href="/siparis"><i class="fa fa-user"></i> Hesabım</a></li>
+                                <li><a href="/logout"><i class="fa fa-user"></i>Çıkış</a></li>
+                                {% endif %}
+                            {% if not request.user.is_authenticated and not request.user.is_superuser %}
+                                								<li><a href="/log-in"><i class="fa fa-lock"></i> Login</a></li>
+                            {% endif %}
+
+							</ul>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="/" {% if "/" == request.path %}class="active"{% endif %}>Index</a></li>
+                                <li><a href="dealer">Sign Up</a></li>
+								<li class="dropdown"><a href="contact" {% if "/contact" == request.path %}class="active"{% endif %}>Contact</a>
+								<li class="dropdown"><a href="#" >Products</a>
+                                <!--  <li><a href="/error">404</a></li>-->
+
+                                    <!--<i class="fa fa-angle-down"></i>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">Ürünler</a></li>
+										<li><a href="/product-details">Ürün Detayları</a></li>
+										<li><a href="/checkout">Checkout</a></li>
+										<li><a href="/cart">Cart</a></li>
+										<li><a href="/log-in">Login</a></li>
+                                    </ul>
+                                </li>
+                                -->
+                                </li>
+
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+
+						<div class="search_box pull-right">
+
+                            <form action="/search/" method="POST">
+                                {% csrf_token %}
+							<input style="border-radius: 20px" name="query" type="text" placeholder="Search..."/>
+                                </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
